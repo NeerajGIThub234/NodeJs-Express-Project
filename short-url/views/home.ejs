@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>URL SHORTNER</title>
+</head>
+<body>
+
+<h1>URL SHORTNER</h1>
+<% if (locals.id) { %>
+    <p>URL GENERATED:- http://localhost:8001/<%=id%></p>
+<% } %>
+<h4> Our prefix is:-"http://localhost:8001/"</h4>
+<div> 
+    <form method="post" action="/url">
+        <label>Enter Your Original URL:-</label>
+        <input type="text" name="url" placeholder="https://example.com" />
+        <br>
+        <br>
+        <button type="submit">GENERATE</button>
+    </form>
+</div>
+<div>
+    <% if (locals.urls) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>S. NO.</th>
+                    <th>SHORT ID</th>
+                    <th>REDIRECT</th>
+                    <th>CLICKS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% urls.forEach((url, index) => { %> <!-- Corrected forEach syntax -->
+                    <tr> <!-- Added missing <tr> -->
+                        <td><%= index + 1 %></td>
+                        <td><%= url.shortId %></td>
+                        <td><%= url.redirectUrl %></td>
+                        <td><%= url.visitHistory.length %></td>
+                    </tr>
+                <% }); %> 
+            </tbody>
+        </table>
+    <% } %>    
+</div>
+
+</body>
+</html>
